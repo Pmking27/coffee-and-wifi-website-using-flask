@@ -1,0 +1,68 @@
+{% include "header.html" %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    {% if logged_in: %}
+    <div class="container mx-auto mt-md-4">
+        <a class="btn btn-primary btn-dark" href="{{url_for('add_new_cafe')}}" role="button">Add New Cafe</a>
+    </div>
+    {% endif %}
+    <div class="container mx-auto mt-md-4">
+        <h1 style="text-align: center;"> Coffee ☕ & Wifi 📶 </h1>
+        <hr>
+    </div>
+
+    <div class="container">
+        <table class="table" id="table" data-toggle="table" data-filter-control="true"
+            data-show-search-clear-button="true" data-sortable="true" classes="table-sm table-hover"
+            data-pagination="true" data-show-columns="true" data-show-columns-toggle-all="true" class="table-responsive"
+            data-filter-control="true">
+            <thead class="thead-dark">
+                <tr>
+                    <!--special characters and spaces not allowed in data-field name-->
+                    <th data-field="column1" data-filter-control="input" data-sortable="true">Name</th>
+                    <th data-field="column2">Map</th>
+                    <th data-field="column3">Img</th>
+                    <th data-field="column4" data-filter-control="select" data-sortable="true">Location</th>
+                    <th data-field="column5" data-filter-control="select" data-sortable="true">Sockets</th>
+                    <th data-field="column6" data-filter-control="select" data-sortable="true">Toilet</th>
+                    <th data-field="column7" data-filter-control="select" data-sortable="true">Wifi</th>
+                    <th data-field="column8" data-filter-control="select" data-sortable="true">Calls</th>
+                    <th data-field="column9" data-filter-control="select" data-sortable="true">Seats</th>
+                    <th data-field="column10" data-filter-control="select" data-sortable="true">Price</th>
+                    {% if is_admin: %}
+                    <th data-field="column11" data-filter-control="select" data-sortable="true">Admin</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_a %}
+                <tr>
+                    <!--special characters and spaces not allowed in data-field name-->
+                    <td>{{ row.name }}</td>
+                    <td><a href="{{ row.map_url }}">Link</a></td>
+                    <td style="height: 20px;"><img src="{{ row.img_url }}" class="img-fluid img-thumbnail"></td>
+                    <td>{{ row.location }}</td>
+                    <td>{{ row.has_sockets }}</td>
+                    <td>{{ row.has_toilet }}</td>
+                    <td>{{ row.has_wifi }}</td>
+                    <td>{{ row.can_take_calls }}</td>
+                    <td>{{ row.seats }}</td>
+                    <td>{{ row.coffee_price }}</td>
+                    {% if is_admin: %}
+                    <td><a href="{{ url_for('delete', id=row.id) }}">Delete</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+{% include "footer.html" %}

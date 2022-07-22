@@ -1,0 +1,19 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% include "header.html" %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto mt-md-4">
+        {{ wtf.quick_form(form, novalidate=True, form_type='basic', button_map={'submit_button': 'dark'}) }}
+      </div>
+    </div>
+  </div>
+
+</body>
